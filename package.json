@@ -1,0 +1,17 @@
+{
+  "name": "sanity-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "export-datasets": "node src/exportDatasets.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sanity/client": "^2.23.2",
+    "dotenv": "^10.0.0",
+    "pg": "^8.7.1"
+  }
+}
