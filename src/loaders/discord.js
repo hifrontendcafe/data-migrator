@@ -1,19 +1,16 @@
-import { Client, Intents } from "discord.js";
-import config from "../config.js";
+import { Client, Intents } from 'discord.js';
+import config from '../config.js';
 
-const client = new Client({
-  intents: [
-    Intents.FLAGS.GUILDS,
-    Intents.FLAGS.GUILD_MEMBERS,
-    Intents.FLAGS.GUILD_PRESENCES,
-  ],
+export const discordClient = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_PRESENCES],
 });
 
 /**
- * @param {() => Promise<void>} fn
+ * @param {(client: Client) => Promise<void>} fn
  */
 export function execute(fn) {
-  client.once("ready", fn);
+  discordClient.once('ready', fn);
+  discordClient.destroy();
 }
 
-client.login(config.discord.token);
+discordClient.login(config.discord.token);
