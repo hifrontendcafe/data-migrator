@@ -1,18 +1,17 @@
 import { getDiscordUsers, getMentors, getPersons, getProfiles } from './api/queries.js';
 import { writeFileSync } from 'fs';
 
-getMentors().then((mentors) => {
-  writeFileSync('./datasets/mentors.json', JSON.stringify(mentors, null, 2));
-});
+const queries = [
+  { fetch: getMentors, file: './datasets/mentors.json' },
+  { fetch: getPersons, file: './datasets/persons.json' },
+  { fetch: getProfiles, file: './datasets/profiles.json' },
+  { fetch: getDiscordUsers, file: './datasets/discord-users.json' },
+];
 
-getPersons().then((persons) => {
-  writeFileSync('./datasets/persons.json', JSON.stringify(persons, null, 2));
-});
-
-getProfiles().then((profiles) => {
-  writeFileSync('./datasets/profiles.json', JSON.stringify(profiles, null, 2));
-});
-
-getDiscordUsers().then((users) => {
-  writeFileSync('./datasets/discord-users.json', JSON.stringify(users, null, 2));
-});
+export function saveQueries() {
+  queries.forEach((query) => {
+    query.fetch().then((data) => {
+      writeFileSync(query.file, JSON.stringify(data, null, 2));
+    });
+  });
+}

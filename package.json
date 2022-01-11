@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "export-datasets": "node src/exportDatasets.js"
+    "main": "node src/index.js"
   },
   "author": "",
   "license": "ISC",
