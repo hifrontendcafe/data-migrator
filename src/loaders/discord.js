@@ -9,8 +9,10 @@ export const discordClient = new Client({
  * @param {(client: Client) => Promise<void>} fn
  */
 export function execute(fn) {
-  discordClient.once('ready', fn);
-  discordClient.destroy();
+  discordClient.once('ready', async (client) => {
+    await fn(client);
+    discordClient.destroy();
+  });
 }
 
 discordClient.login(config.discord.token);
