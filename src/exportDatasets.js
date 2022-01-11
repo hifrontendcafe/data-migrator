@@ -1,11 +1,12 @@
 import { getDiscordUsers, getMentors, getPersons, getProfiles } from './api/queries.js';
 import { writeFileSync } from 'fs';
+import config from './config.js';
 
 const queries = [
-  { fetch: getMentors, file: './datasets/mentors.json' },
-  { fetch: getPersons, file: './datasets/persons.json' },
-  { fetch: getProfiles, file: './datasets/profiles.json' },
-  { fetch: getDiscordUsers, file: './datasets/discord-users.json' },
+  { fetch: getMentors, file: `${config.datasetsDir}/mentors.json` },
+  { fetch: getPersons, file: `${config.datasetsDir}/persons.json` },
+  { fetch: getProfiles, file: `${config.datasetsDir}/profiles.json` },
+  { fetch: getDiscordUsers, file: `${config.datasetsDir}/discord-users.json` },
 ];
 
 export function saveQueries() {

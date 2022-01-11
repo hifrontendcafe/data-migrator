@@ -20,6 +20,7 @@ function getEnvVar(name) {
 }
 
 export default {
+  datasetsDir: './datasets',
   sanity: {
     dataset: getEnvVar('SANITY_DATASET'),
     projectId: getEnvVar('SANITY_PROJECT_ID'),
