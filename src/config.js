@@ -1,4 +1,4 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
 const envs = dotenv.config();
 
@@ -21,13 +21,17 @@ function getEnvVar(name) {
 
 export default {
   sanity: {
-    dataset: getEnvVar("SANITY_DATASET"),
-    projectId: getEnvVar("SANITY_PROJECT_ID"),
-    token: getEnvVar("SANITY_TOKEN"),
+    dataset: getEnvVar('SANITY_DATASET'),
+    projectId: getEnvVar('SANITY_PROJECT_ID'),
+    token: getEnvVar('SANITY_TOKEN'),
     useCdn: false,
-    apiVersion: "2022-01-08",
+    apiVersion: '2022-01-08',
   },
   postgres: {
-    connectionString: getEnvVar("DATABASE_URL"),
+    connectionString: getEnvVar('DATABASE_URL'),
+  },
+  discord: {
+    token: getEnvVar('DISCORD_TOKEN'),
+    guildId: '594363964499165194',
   },
 };
