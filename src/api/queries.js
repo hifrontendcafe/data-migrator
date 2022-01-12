@@ -1,6 +1,6 @@
 import sanityClient from '../loaders/sanity.js';
 import postgresClient from '../loaders/postgres.js';
-import { Collection, Guild, GuildMember } from 'discord.js';
+import { Collection, Guild, GuildMember, Role } from 'discord.js';
 import config from '../config.js';
 import { execute } from '../loaders/discord.js';
 
@@ -18,7 +18,7 @@ export async function getProfiles() {
   return result.rows;
 }
 
-/** @typedef {{ id: string, username: string | null, username2: string  }} DiscordUser */
+/** @typedef {{ id: string, username: string | null, username2: string, roles: Role[]  }} DiscordUser */
 /** @typedef {Array<DiscordUser>} DiscordUsers */
 
 /**
@@ -44,6 +44,7 @@ export function getDiscordUsers() {
             id: member.id,
             username: member.nickname,
             username2: member.user.tag,
+            roles: member.roles.cache.toJSON(),
           });
         });
       } catch (err) {
