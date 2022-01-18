@@ -5,11 +5,28 @@ import config from '../config.js';
 import { execute } from '../loaders/discord.js';
 
 export function getMentors() {
-  return sanityClient.fetch("*[_type == 'mentor']");
+  return sanityClient.fetch('*[_type == "mentor"]{"person": discordUser->, ...}');
 }
 
 export function getPersons() {
   return sanityClient.fetch("*[_type == 'person']");
+}
+
+export function getCmykParticipants() {
+  return sanityClient.fetch('*[_type == "cmykParticipant"]{"person": discordUser->, ...}');
+}
+
+export function getReactGroupsParticipants() {
+  return sanityClient.fetch(
+    `*[_type == "reactGroup"]{
+      "captain": teamCaptain->,
+      "participantPersons": participants[]{
+        _type == 'reference' => @->,
+        _type != 'reference' => @,
+      },
+      ...
+    }`,
+  );
 }
 
 export async function getProfiles() {
@@ -47,7 +64,10 @@ export function getDiscordUsers() {
             roles: member.roles.cache.toJSON(),
           });
         });
+
+        client.destroy();
       } catch (err) {
+        console.log('error', err);
         reject(err);
       }
 
