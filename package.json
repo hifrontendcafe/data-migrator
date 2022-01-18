@@ -13,6 +13,7 @@
     "@sanity/client": "^2.23.2",
     "discord.js": "^13.5.1",
     "dotenv": "^10.0.0",
+    "groq-js": "^0.3.0-beta.2",
     "pg": "^8.7.1"
   }
 }
