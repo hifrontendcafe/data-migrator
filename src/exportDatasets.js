@@ -10,7 +10,11 @@ export const queries = [
 ];
 
 export function saveQueries() {
-  mkdirSync(`${config.datasetsDir}/raw`);
+  const rawPath = `${config.datasetsDir}/raw`;
+
+  if (!existsSync(rawPath)) {
+    mkdirSync(rawPath);
+  }
 
   queries.forEach((query) => {
     query.fetch().then((data) => {
