@@ -24,7 +24,7 @@ export interface Person {
   };
 }
 
-export type Persons = Person[];
+export type People = Person[];
 
 export interface Mentor {
   _createdAt: string;

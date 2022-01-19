@@ -3,6 +3,7 @@ import {
   getDiscordUsers,
   getMentors,
   getPersons,
+  getPersonsWithoutIds,
   getProfiles,
   getReactGroupsParticipants,
 } from './api/queries.js';
@@ -11,7 +12,8 @@ import config from './config.js';
 
 export const queries = [
   { fetch: getMentors, file: `${config.datasetsDir}/raw/mentors.json` },
-  { fetch: getPersons, file: `${config.datasetsDir}/raw/persons.json` },
+  { fetch: getPersons, file: `${config.datasetsDir}/raw/people.json` },
+  { fetch: getPersonsWithoutIds, file: `${config.datasetsDir}/raw/people-without-id.json` },
   { fetch: getProfiles, file: `${config.datasetsDir}/raw/profiles.json` },
   { fetch: getCmykParticipants, file: `${config.datasetsDir}/raw/cmyk-participant.json` },
   { fetch: getReactGroupsParticipants, file: `${config.datasetsDir}/raw/react-groups-participants.json` },

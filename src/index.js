@@ -1,3 +1,7 @@
 import { saveQueries } from './exportDatasets.js';
 
-saveQueries();
+async function main() {
+  saveQueries();
+}
+
+main();
