@@ -5,7 +5,7 @@ import config from '../config.js';
 import { execute } from '../loaders/discord.js';
 
 export function getMentors() {
-  return sanityClient.fetch('*[_type == "mentor"]{"person": discordUser->, ...}');
+  return sanityClient.fetch('*[_type == "mentor"]{..., "person": persona->, "topics": topics[]->}');
 }
 
 export function getPersons() {
@@ -13,18 +13,15 @@ export function getPersons() {
 }
 
 export function getCmykParticipants() {
-  return sanityClient.fetch('*[_type == "cmykParticipant"]{"person": discordUser->, ...}');
+  return sanityClient.fetch('*[_type == "cmykParticipant"]{..., "person": discordUser->}');
 }
 
 export function getReactGroupsParticipants() {
   return sanityClient.fetch(
     `*[_type == "reactGroup"]{
+      ...,
       "captain": teamCaptain->,
-      "participantPersons": participants[]{
-        _type == 'reference' => @->,
-        _type != 'reference' => @,
-      },
-      ...
+      "participants": participants[]->
     }`,
   );
 }
@@ -35,16 +32,13 @@ export async function getProfiles() {
   return result.rows;
 }
 
-/** @typedef {{ id: string, username: string | null, username2: string, roles: Role[]  }} DiscordUser */
-/** @typedef {Array<DiscordUser>} DiscordUsers */
-
 /**
- * @returns {Promise<DiscordUsers>}
+ * @returns {Promise<import('../index.js').DiscordUsers>}
  */
 export function getDiscordUsers() {
   return new Promise((resolve, reject) => {
     execute(async (client) => {
-      /** @type {DiscordUsers} */
+      /** @type {import('../index.js').DiscordUsers} */
       const dataset = [];
 
       /** @type {Guild} */
