@@ -7,7 +7,8 @@ import {
   getProfiles,
   getReactGroupsParticipants,
 } from './api/queries.js';
-import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync } from 'fs';
+import { writeFile } from 'fs/promises';
 import config from './config.js';
 
 export const queries = [
@@ -17,20 +18,23 @@ export const queries = [
   { fetch: getProfiles, file: `${config.datasetsDir}/raw/profiles.json` },
   { fetch: getCmykParticipants, file: `${config.datasetsDir}/raw/cmyk-participant.json` },
   { fetch: getReactGroupsParticipants, file: `${config.datasetsDir}/raw/react-groups-participants.json` },
-  { fetch: getDiscordUsers, file: `${config.datasetsDir}/discord-users.json` },
+  { fetch: getProfiles, file: `${config.datasetsDir}/raw/pg-profiles.json` },
 ];
 
-export function saveQueries() {
+export async function saveQueries() {
+  console.info('init queries');
   const rawPath = `${config.datasetsDir}/raw`;
 
   if (!existsSync(rawPath)) {
     mkdirSync(rawPath);
   }
 
-  queries.forEach((query) => {
-    query.fetch().then((data) => {
+  for (const query of queries) {
+    console.log(`Start Query: ${query.fetch.name}`);
+    await query.fetch().then(async (data) => {
       console.log(`writing ${query.file}`);
-      writeFileSync(query.file, JSON.stringify(data, null, 2));
+      await writeFile(query.file, JSON.stringify(data, null, 2));
     });
-  });
+    console.log(`End Query: ${query.fetch.name}`);
+  }
 }

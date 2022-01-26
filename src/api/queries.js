@@ -32,7 +32,8 @@ export function getReactGroupsParticipants() {
 
 export async function getProfiles() {
   const result = await postgresClient.query('SELECT * FROM "Profile"');
-  postgresClient.end();
+  return result.rows;
+}
   return result.rows;
 }
 
@@ -62,8 +63,6 @@ export function getDiscordUsers() {
             roles: member.roles.cache.toJSON(),
           });
         });
-
-        client.destroy();
       } catch (err) {
         console.log('error', err);
         reject(err);

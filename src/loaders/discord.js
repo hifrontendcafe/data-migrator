@@ -9,10 +9,17 @@ export const discordClient = new Client({
  * @param {(client: Client) => Promise<void>} fn
  */
 export function execute(fn) {
-  discordClient.once('ready', async (client) => {
+  discordClient.once('executeTask', async (client) => {
     await fn(client);
-    discordClient.destroy();
   });
+  discordClient.emit('executeTask');
 }
 
-discordClient.login(config.discord.token);
+export async function init() {
+  console.log('discord init connect');
+  return discordClient.login(config.discord.token);
+}
+
+export function end() {
+  return discordClient.destroy();
+}
