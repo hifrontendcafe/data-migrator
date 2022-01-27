@@ -9,7 +9,7 @@ import {
   getPersonsWithoutIds,
   getReactGroupsParticipants,
 } from './api/queries/sanity.js';
-import { getProfiles, getTechnologies } from './api/queries/postgres.js';
+import { getProfiles, getRoles, getSeniorities, getTechnologies } from './api/queries/postgres.js';
 import { getDiscordUsers } from './api/queries/discord.js';
 
 export const queries = [
@@ -21,6 +21,8 @@ export const queries = [
   { fetch: getDiscordUsers, file: `${config.datasetsDir}/raw/discord-users.json` },
   { fetch: getProfiles, file: `${config.datasetsDir}/raw/pg-profiles.json` },
   { fetch: getTechnologies, file: `${config.datasetsDir}/raw/pg-techonologies.json` },
+  { fetch: getRoles, file: `${config.datasetsDir}/raw/pg-roles.json` },
+  { fetch: getSeniorities, file: `${config.datasetsDir}/raw/pg-seniorities.json` },
 ];
 
 export async function saveQueries() {

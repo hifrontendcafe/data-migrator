@@ -9,3 +9,13 @@ export async function getTechnologies() {
   const result = await postgresClient.query('SELECT * FROM "Technology"');
   return result.rows;
 }
+
+export async function getRoles() {
+  const result = await postgresClient.query('SELECT * FROM "Role"');
+  return result.rows;
+}
+
+export async function getSeniorities() {
+  const result = await postgresClient.query('SELECT * FROM "Seniority"');
+  return result.rows;
+}
