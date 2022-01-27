@@ -1,5 +1,28 @@
 import type { Role } from 'discord.js';
 
+export interface Profile {
+  id: string;
+  name: string;
+  email: string;
+  available: boolean;
+  active: boolean;
+  twitter: string;
+  github: string;
+  portfolio: string;
+  discord: string;
+  description: string;
+  location: string;
+  linkedin: string;
+  photo: string;
+  created_at: string;
+  updated_at: string;
+  roleId: string;
+  seniorityId: string;
+  discordId: string;
+}
+
+export type Profiles = Profile[];
+
 export interface Person {
   _createdAt: string;
   _id: string;
