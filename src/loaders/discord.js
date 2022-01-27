@@ -12,7 +12,7 @@ export function execute(fn) {
   discordClient.once('executeTask', async (client) => {
     await fn(client);
   });
-  discordClient.emit('executeTask');
+  discordClient.emit('executeTask', discordClient);
 }
 
 export async function init() {

@@ -3,11 +3,11 @@ import { end as endDiscordClient, init as initDiscordClient } from './loaders/di
 import { end as endPostgresClient, init as initPostgresClient } from './loaders/postgres.js';
 
 async function init() {
-  return Promise.all([initPostgresClient()]);
+  return Promise.all([initDiscordClient(), initPostgresClient()]);
 }
 
 async function end() {
-  return Promise.all([endPostgresClient()]);
+  return Promise.all([endDiscordClient(), endPostgresClient()]);
 }
 
 async function main() {
