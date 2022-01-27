@@ -1,16 +1,16 @@
-import {
-  getCmykParticipants,
-  getDiscordUsers,
-  getMentors,
-  getPersons,
-  getPersonsWithoutIds,
-  getProfiles,
-  getReactGroupsParticipants,
-  getTechnologies,
-} from './api/queries.js';
 import { existsSync, mkdirSync } from 'fs';
 import { writeFile } from 'fs/promises';
 import config from './config.js';
+
+import {
+  getCmykParticipants,
+  getMentors,
+  getPersons,
+  getPersonsWithoutIds,
+  getReactGroupsParticipants,
+} from './api/queries/sanity.js';
+import { getProfiles, getTechnologies } from './api/queries/postgres.js';
+import { getDiscordUsers } from './api/queries/discord.js';
 
 export const queries = [
   { fetch: getMentors, file: `${config.datasetsDir}/raw/mentors.json` },
