@@ -16,6 +16,7 @@ function buildPatches(technologies) {
   /** @type {{ _type: "technology", name: string }[]} */
   const patches = technologies.map((technology) => ({
     _type: 'technology',
+    _id: technology.id,
     name: technology.name,
   }));
 
