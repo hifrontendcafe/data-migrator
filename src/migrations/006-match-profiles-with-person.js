@@ -85,7 +85,7 @@ export function execMigration(profilesWithPerson) {
 }
 
 async function main() {
-  const profilesText = await readFile(`${config.datasetsDir}/derived/profiles-to-person.json`);
+  const profilesText = await readFile(`${config.datasetsDir}/derived/profiles-with-person.json`);
   const profiles = JSON.parse(profilesText.toString());
   console.log(profiles);
   execMigration(profiles);

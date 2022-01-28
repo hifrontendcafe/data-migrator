@@ -11,15 +11,22 @@ async function main() {
   const people = JSON.parse(peopleText);
 
   /** @type {{ person: import('..').Person, profile: import('..').Profile}[]} */
-  const matches = [];
+  const profilesWithPerson = [];
+
+  /** @type {import('..').Profile[]} */
+  const profilesWithoutPerson = [];
+
   profiles.forEach((profile) => {
     const person = people.find((person) => person.discordID?.current === profile.discordId);
     if (person) {
-      matches.push({ profile, person });
+      profilesWithPerson.push({ profile, person });
+    } else {
+      profilesWithoutPerson.push(profile);
     }
   });
 
-  await writeFile(`${config.datasetsDir}/derived/profiles-to-person.json`, JSON.stringify(matches));
+  await writeFile(`${config.datasetsDir}/derived/profiles-with-person.json`, JSON.stringify(profilesWithPerson));
+  await writeFile(`${config.datasetsDir}/derived/profiles-without-person.json`, JSON.stringify(profilesWithoutPerson));
 }
 
 main();

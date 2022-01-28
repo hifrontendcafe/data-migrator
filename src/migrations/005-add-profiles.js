@@ -45,8 +45,8 @@ function buildPatches(profiles) {
 const createTransaction = (patches) => {
   const tx = sanityClient.transaction();
 
-  patches.forEach((patch) => {
-    tx.create(patch);
+  patches.forEach((patch, i) => {
+    tx.createIfNotExists(patch);
   });
 
   return tx;
