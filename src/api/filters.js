@@ -5,7 +5,7 @@ import { query } from '../loaders/groq.js';
  * @returns {Promise<import('../index.js').DiscordUsers>}
  */
 export async function filterMentors(users) {
-  return query(users, '*[roles[].name match "Mentors"]{id, username2, "roles": roles[].name}');
+  return query(users, '*[roles[].name match "Mentors"]{id, username2}');
 }
 
 /**
