@@ -86,7 +86,6 @@ async function migrate(profilesWithPerson) {
 export function execMigration(profilesWithPerson) {
   migrate(profilesWithPerson).catch((/** @type {unknown} */ err) => {
     console.error(err);
-    console.error(err?.details.items[0].error.value);
     process.exit(1);
   });
 }

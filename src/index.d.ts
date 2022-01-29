@@ -1,5 +1,12 @@
 import type { Role } from 'discord.js';
 
+export interface ProfilePhoto {
+  id: string;
+  description: string;
+  type: string;
+  src: string;
+}
+
 export interface Profile {
   id: string;
   name: string;
