@@ -28,6 +28,11 @@ export interface Profile {
   discordId: string;
 }
 
+export type ProfileTechnology = {
+  A: string;
+  B: string;
+}
+
 export type Profiles = Profile[];
 
 export interface Person {

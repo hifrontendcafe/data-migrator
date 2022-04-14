@@ -19,3 +19,8 @@ export async function getSeniorities() {
   const result = await postgresClient.query('SELECT * FROM "Seniority"');
   return result.rows;
 }
+
+export async function getProfileTecnologies() {
+  const result = await postgresClient.query('SELECT * FROM "_ProfileToTechnology"');
+  return result.rows;
+}

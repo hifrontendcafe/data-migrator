@@ -1,0 +1,15 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "190.111.214.62",
+      "port": 9100,
+      "driver": "PostgreSQL",
+      "name": "Fec Talents",
+      "group": "fec",
+      "database": "fec",
+      "username": "fec",
+      "password": "WJhSeHxFRg3PiCZPwmoN"
+    }
+  ]
+}
