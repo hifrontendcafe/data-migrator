@@ -25,3 +25,7 @@ export function getReactGroupsParticipants() {
     }`,
   );
 }
+
+export function getDocs() {
+  return sanityClient.fetch('*[_type == "docs"]');
+}

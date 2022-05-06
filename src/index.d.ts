@@ -83,3 +83,13 @@ export interface DiscordUser {
 }
 
 export type DiscordUsers = DiscordUser[];
+
+export interface Doc {
+  _id: string;
+  title: string;
+  content: string;
+  slug: {
+    _type: 'slug'
+    current: string;
+  },
+}

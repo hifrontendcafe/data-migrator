@@ -57,7 +57,6 @@ export async function createTransaction(operations) {
 }
 
 /**
- *
  * @param {ProfileTechnology[]} relations
  */
 async function migrate(relations) {

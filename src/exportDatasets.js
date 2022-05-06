@@ -4,6 +4,7 @@ import config from './config.js';
 
 import {
   getCmykParticipants,
+  getDocs,
   getMentors,
   getPersons,
   getPersonsWithoutIds,
@@ -24,7 +25,7 @@ export const queries = [
   { fetch: getPersonsWithoutIds, file: `${config.datasetsDir}/raw/people-without-id.json` },
   { fetch: getCmykParticipants, file: `${config.datasetsDir}/raw/cmyk-participant.json` },
   { fetch: getReactGroupsParticipants, file: `${config.datasetsDir}/raw/react-groups-participants.json` },
-  { fetch: getDiscordUsers, file: `${config.datasetsDir}/raw/discord-users.json` },
+  // { fetch: getDiscordUsers, file: `${config.datasetsDir}/raw/discord-users.json` },
   { fetch: getProfiles, file: `${config.datasetsDir}/raw/pg-profiles.json` },
   { fetch: getTechnologies, file: `${config.datasetsDir}/raw/pg-techonologies.json` },
   { fetch: getRoles, file: `${config.datasetsDir}/raw/pg-roles.json` },
@@ -32,6 +33,10 @@ export const queries = [
   {
     fetch: getProfileTecnologies,
     file: `${config.datasetsDir}/raw/pg-profile-technologies.json`,
+  },
+  {
+    fetch: getDocs,
+    file: `${config.datasetsDir}/raw/docs.json`,
   },
 ];
 

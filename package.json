@@ -10,11 +10,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sanity/block-tools": "^2.29.3",
     "@sanity/client": "^3.3.0",
+    "@sanity/schema": "^2.29.3",
     "discord.js": "^13.5.1",
     "dotenv": "^10.0.0",
     "groq-js": "^0.3.0-beta.2",
+    "jsdom": "^19.0.0",
     "pg": "^8.7.1",
+    "remark-html": "^15.0.1",
+    "remark-parse": "^10.0.1",
+    "unified": "^10.1.2",
     "uuid": "^8.3.2"
   }
 }
