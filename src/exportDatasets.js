@@ -1,44 +1,7 @@
 import { existsSync, mkdirSync } from 'fs';
 import { writeFile } from 'fs/promises';
 import config from './config.js';
-
-import {
-  getCmykParticipants,
-  getDocs,
-  getMentors,
-  getPersons,
-  getPersonsWithoutIds,
-  getReactGroupsParticipants,
-} from './api/queries/sanity.js';
-import {
-  getProfiles,
-  getRoles,
-  getSeniorities,
-  getTechnologies,
-  getProfileTecnologies,
-} from './api/queries/postgres.js';
-import { getDiscordUsers } from './api/queries/discord.js';
-
-export const queries = [
-  { fetch: getMentors, file: `${config.datasetsDir}/raw/mentors.json` },
-  { fetch: getPersons, file: `${config.datasetsDir}/raw/people.json` },
-  { fetch: getPersonsWithoutIds, file: `${config.datasetsDir}/raw/people-without-id.json` },
-  { fetch: getCmykParticipants, file: `${config.datasetsDir}/raw/cmyk-participant.json` },
-  { fetch: getReactGroupsParticipants, file: `${config.datasetsDir}/raw/react-groups-participants.json` },
-  // { fetch: getDiscordUsers, file: `${config.datasetsDir}/raw/discord-users.json` },
-  { fetch: getProfiles, file: `${config.datasetsDir}/raw/pg-profiles.json` },
-  { fetch: getTechnologies, file: `${config.datasetsDir}/raw/pg-techonologies.json` },
-  { fetch: getRoles, file: `${config.datasetsDir}/raw/pg-roles.json` },
-  { fetch: getSeniorities, file: `${config.datasetsDir}/raw/pg-seniorities.json` },
-  {
-    fetch: getProfileTecnologies,
-    file: `${config.datasetsDir}/raw/pg-profile-technologies.json`,
-  },
-  {
-    fetch: getDocs,
-    file: `${config.datasetsDir}/raw/docs.json`,
-  },
-];
+import queries from './queries.js';
 
 export async function saveQueries() {
   console.info('init queries');
