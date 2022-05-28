@@ -38,4 +38,9 @@ export default {
     token: getEnvVar('DISCORD_TOKEN'),
     guildId: '594363964499165194',
   },
+  notion: {
+    token: getEnvVar('NOTION_TOKEN'),
+    mentorsDatabaseId: getEnvVar('NOTION_MENTORS_DATABASE_ID'),
+    enabled: getEnvVar('NOTION_ENABLED'),
+  },
 };

@@ -16,12 +16,13 @@ import {
 
 import { getDiscordUsers } from './api/queries/discord.js';
 import config from './config.js';
+import { listMentors } from './api/queries/notion.js';
 
 /**
  * @type {{
  *   fetch: () => Promise<any>;
  *   file: string;
- *   type: "sanity" | "discord" | "postgres"
+ *   type: "sanity" | "discord" | "postgres" | "notion"
  * }[]}
  */
 const allQueries = [
@@ -85,6 +86,11 @@ const allQueries = [
     file: `${config.datasetsDir}/raw/docs.json`,
     type: 'sanity',
   },
+  {
+    fetch: listMentors,
+    file: `${config.datasetsDir}/raw/notion-mentors.json`,
+    type: 'notion',
+  },
 ];
 
 const enabledQueries = allQueries.filter((query) => {
@@ -95,6 +101,8 @@ const enabledQueries = allQueries.filter((query) => {
       return config.discord.enabled;
     case 'postgres':
       return config.postgres.enabled;
+    case 'notion':
+      return config.notion.enabled;
     default:
       throw new Error('invalid query type');
   }
