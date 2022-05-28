@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@notionhq/client": "^1.0.4",
     "@sanity/block-tools": "^2.29.3",
     "@sanity/client": "^3.3.0",
     "@sanity/schema": "^2.29.3",
