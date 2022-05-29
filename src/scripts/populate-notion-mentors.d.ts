@@ -16,6 +16,7 @@ export interface Mentor {
   topics?: TopicsEntity[] | null;
   github?: string | null;
   web?: string | null;
+  notionId?: string | null;
 }
 export interface Person {
   _createdAt: string;

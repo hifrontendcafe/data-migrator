@@ -27,17 +27,17 @@ async function readMentorsFromFile() {
 
 const databaseId = config.notion.mentorsDatabaseId;
 
+const statuses = {
+  ACTIVE: 'Activo',
+  INACTIVE: 'Inactivo',
+  NOT_AVAILABLE: 'No disponible',
+  OUT: 'Fuera del programa',
+};
+
 /**
  * @param {Mentor} mentor
  */
 export async function addMentor({ name, email, instagram, linkedin, twitter, github, status }) {
-  const statuses = {
-    ACTIVE: 'Activo',
-    INACTIVE: 'Inactivo',
-    NOT_AVAILABLE: 'No disponible',
-    OUT: 'Fuera del programa',
-  };
-
   try {
     const response = await client.pages.create({
       parent: { database_id: databaseId },
@@ -90,7 +90,81 @@ export async function addMentor({ name, email, instagram, linkedin, twitter, git
     console.log('Success! Entry added.');
   } catch (error) {
     if (isNotionClientError(error)) {
-      // error is now strongly typed to NotionClientError
+      switch (error.code) {
+        case ClientErrorCode.RequestTimeout:
+          console.error(error.message);
+          break;
+        case APIErrorCode.ObjectNotFound:
+          console.error(error.body);
+          break;
+        case APIErrorCode.Unauthorized:
+          console.error(error.body);
+          break;
+        default:
+          throw new Error('should never happen');
+      }
+    } else {
+      console.error(error);
+    }
+  }
+}
+
+/**
+ * @param {{pageId: string} & Mentor} mentor
+ */
+export async function updateMentor({ pageId, name, email, instagram, linkedin, twitter, github, status }) {
+  try {
+    const response = await client.pages.update({
+      page_id: pageId,
+      properties: {
+        ...(name && {
+          Name: {
+            type: 'title',
+            title: [{ text: { content: name } }],
+          },
+        }),
+        ...(email && {
+          Mails: {
+            type: 'email',
+            email: email,
+          },
+        }),
+        ...(instagram && {
+          Instagram: {
+            type: 'url',
+            url: instagram,
+          },
+        }),
+        ...(linkedin && {
+          Linkedin: {
+            type: 'url',
+            url: linkedin,
+          },
+        }),
+        ...(twitter && {
+          Twitter: {
+            type: 'url',
+            url: twitter,
+          },
+        }),
+        ...(github && {
+          Github: {
+            type: 'url',
+            url: github,
+          },
+        }),
+        ...(status && {
+          Estado: {
+            type: 'select',
+            select: { name: statuses[status] },
+          },
+        }),
+      },
+    });
+    console.log(response);
+    console.log('Success! Entry updated.');
+  } catch (error) {
+    if (isNotionClientError(error)) {
       switch (error.code) {
         case ClientErrorCode.RequestTimeout:
           console.error(error.message);
@@ -112,7 +186,7 @@ export async function addMentor({ name, email, instagram, linkedin, twitter, git
 
 readMentorsFromFile().then((mentors) => {
   mentors.forEach((mentor) => {
-    addMentor({
+    const props = {
       name: mentor.name ?? '',
       email: mentor.person.email ?? '',
       github: mentor.github ?? mentor.person.github ?? '',
@@ -120,6 +194,12 @@ readMentorsFromFile().then((mentors) => {
       linkedin: mentor.linkedin ?? mentor.person.linkedin ?? '',
       twitter: mentor.person.twitter ?? '',
       status: mentor.status,
-    });
+    };
+
+    if (mentor.notionId) {
+      updateMentor({ pageId: mentor.notionId, ...props });
+    } else {
+      addMentor(props);
+    }
   });
 });
