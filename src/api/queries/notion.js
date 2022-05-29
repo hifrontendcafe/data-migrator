@@ -6,7 +6,7 @@ const databaseId = config.notion.mentorsDatabaseId;
 
 export async function listMentors() {
   try {
-    const response = await client.databases.retrieve({ database_id: databaseId });
+    const response = await client.databases.query({ database_id: databaseId });
     return response;
   } catch (error) {
     if (isNotionClientError(error)) {
